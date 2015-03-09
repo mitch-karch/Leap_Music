@@ -11,7 +11,7 @@ WavePlayer wp;
 Glide gainGlide, frequencyGlide;
 
 void setup(){
-    size(800,500,OPENGL);
+    size(1000,500,OPENGL);
     background(255);
     
     leap = new LeapMotion(this);
@@ -36,10 +36,10 @@ void draw(){
   background(255);
   for( Hand hand: leap.getHands()){
     hand.draw();
-    gainGlide.setValue(hand.getStabilizedPosition().x/200);
-    frequencyGlide.setValue(hand.getStabilizedPosition().x);
-
+    gainGlide.setValue(map(hand.getStabilizedPosition().y,0,500,0,.5));
+    frequencyGlide.setValue(map(hand.getStabilizedPosition().x,0,1000,0,5000));
     println(hand.getStabilizedPosition().y);
   }
+  text("Frequency:"+frequencyGlide.getValue(), 10,30);
   //gainGlide.setValue(mouseX / (float)width);
 }
